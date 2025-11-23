@@ -24,7 +24,7 @@ const signInSchema = z.object({
 
 export default function Auth() {
   const [isSignUp, setIsSignUp] = useState(false);
-  const { signUp, signIn, user } = useAuth();
+  const { signUp, signIn, user, loading } = useAuth();
   const navigate = useNavigate();
 
   const signUpForm = useForm<z.infer<typeof signUpSchema>>({
@@ -95,7 +95,7 @@ export default function Auth() {
         <CardContent>
           {isSignUp ? (
             <Form {...signUpForm}>
-              <form onSubmit={signUpForm.handleSubmit(onSignUp)} className="space-y-4">
+              <form onSubmit={signUpForm.handleSubmit(onSignUp)} className="space-y-4 relative z-10">
                 <FormField
                   control={signUpForm.control}
                   name="fullName"
@@ -103,7 +103,7 @@ export default function Auth() {
                     <FormItem>
                       <FormLabel>Full Name</FormLabel>
                       <FormControl>
-                        <Input placeholder="John Doe" {...field} />
+                        <Input placeholder="John Doe" autoComplete="name" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -116,7 +116,7 @@ export default function Auth() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="john@example.com" {...field} />
+                        <Input type="email" placeholder="john@example.com" autoComplete="email" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -129,20 +129,20 @@ export default function Auth() {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input type="password" placeholder="••••••••" {...field} />
+                        <Input type="password" placeholder="••••••••" autoComplete="new-password" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
                 <Button type="submit" className="w-full">
-                  Sign Up
+                  {loading ? "Creating Account..." : "Sign Up"}
                 </Button>
               </form>
             </Form>
           ) : (
             <Form {...signInForm}>
-              <form onSubmit={signInForm.handleSubmit(onSignIn)} className="space-y-4">
+              <form onSubmit={signInForm.handleSubmit(onSignIn)} className="space-y-4 relative z-10">
                 <FormField
                   control={signInForm.control}
                   name="email"
@@ -150,7 +150,7 @@ export default function Auth() {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input type="email" placeholder="john@example.com" {...field} />
+                        <Input type="email" placeholder="john@example.com" autoComplete="email" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -163,14 +163,14 @@ export default function Auth() {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input type="password" placeholder="••••••••" {...field} />
+                        <Input type="password" placeholder="••••••••" autoComplete="current-password" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
                 <Button type="submit" className="w-full">
-                  Sign In
+                  {loading ? "Signing In..." : "Sign In"}
                 </Button>
               </form>
             </Form>
