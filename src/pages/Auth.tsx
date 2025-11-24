@@ -95,7 +95,7 @@ export default function Auth() {
         <CardContent>
           {isSignUp ? (
             <Form {...signUpForm}>
-              <form onSubmit={signUpForm.handleSubmit(onSignUp)} className="space-y-4 relative z-10">
+              <form onSubmit={signUpForm.handleSubmit(onSignUp)} className="space-y-4">
                 <FormField
                   control={signUpForm.control}
                   name="fullName"
@@ -142,7 +142,7 @@ export default function Auth() {
             </Form>
           ) : (
             <Form {...signInForm}>
-              <form onSubmit={signInForm.handleSubmit(onSignIn)} className="space-y-4 relative z-10">
+              <form onSubmit={signInForm.handleSubmit(onSignIn)} className="space-y-4">
                 <FormField
                   control={signInForm.control}
                   name="email"
